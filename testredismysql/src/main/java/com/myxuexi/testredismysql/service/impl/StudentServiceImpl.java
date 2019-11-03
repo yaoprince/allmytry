@@ -26,6 +26,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> selectAll() {
 
+        /**
+         * 这里的修改记录
+         * 记录
+         *路
+         */
         String key = "student_list";
         Boolean hasKey = redisTemplate.hasKey(key);
         ValueOperations operations = redisTemplate.opsForValue();
