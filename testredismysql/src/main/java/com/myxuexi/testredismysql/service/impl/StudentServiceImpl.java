@@ -33,6 +33,9 @@ public class StudentServiceImpl implements StudentService {
          */
         String key = "student_list";
         Boolean hasKey = redisTemplate.hasKey(key);
+        String keya = "student_listaaaaaaaaaa";
+
+
         ValueOperations operations = redisTemplate.opsForValue();
 
         if (hasKey) {
