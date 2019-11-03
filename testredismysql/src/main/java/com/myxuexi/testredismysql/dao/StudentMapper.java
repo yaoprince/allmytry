@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Mapper
+@Repository
 public interface StudentMapper {
     @Select("Select * from student")
     List<Student> selectAll();

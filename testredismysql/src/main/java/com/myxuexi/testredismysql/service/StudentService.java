@@ -11,6 +11,8 @@ public interface StudentService {
 
     int delete(String numberCode);
 
+    public long decr(String key, long delta);
+
 //    int update(Student student);
 //
 //    int insert(Student student);

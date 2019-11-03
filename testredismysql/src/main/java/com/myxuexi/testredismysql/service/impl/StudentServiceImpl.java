@@ -7,6 +7,7 @@ import com.myxuexi.testredismysql.model.Student;
 import com.myxuexi.testredismysql.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,13 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public List<Student> selectAll() {
 
         String key = "student_list";
         Boolean hasKey = redisTemplate.hasKey(key);
-
         ValueOperations operations = redisTemplate.opsForValue();
 
         if (hasKey) {
@@ -88,6 +88,13 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         return delete;
+    }
+    @Override
+    public long decr(String key, long delta) {
+        if (delta < 0) {
+            throw new RuntimeException("递减因子必须大于0");
+        }
+        return redisTemplate.opsForValue().increment(key, -1);
     }
 
     /**
